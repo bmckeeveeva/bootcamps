@@ -1,7 +1,9 @@
 package veeva.ecm.testbootcamp.csv.impl;
 
+import org.apache.commons.lang.StringUtils;
 import veeva.ecm.testbootcamp.csv.CsvFileManager;
-import veeva.ecm.testbootcamp.util.Environment;
+import veeva.ecm.testbootcamp.env.impl.EnvironmentImpl;
+import veeva.ecm.testbootcamp.env.Environment;
 import veeva.ecm.testbootcamp.auditclient.AuditClient;
 import veeva.ecm.testbootcamp.util.TabularData;
 
@@ -11,11 +13,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class CsvFileManagerStartingImpl implements CsvFileManager {
 
-    private AuditClient auditClient;
+    private final Environment environment = new EnvironmentImpl();
+
+    private final AuditClient auditClient;
 
     public CsvFileManagerStartingImpl(AuditClient auditClient){
         this.auditClient = auditClient;
@@ -23,9 +26,8 @@ public class CsvFileManagerStartingImpl implements CsvFileManager {
 
     @Override
     public String writeCsv(String userId, TabularData tabularData){
-        Environment environment = new Environment();
         if (tabularData.getData().size() > environment.getCsvMaxRecords()){
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         String csvOutputDir = environment.getCsvOutputDir();
         String fileName = UUID.randomUUID().toString() + ".csv";
@@ -34,7 +36,9 @@ public class CsvFileManagerStartingImpl implements CsvFileManager {
         pw.println(asCommaSeparatedString(tabularData.getHeader()));
 
         // print each data record
-        tabularData.getData().stream().forEach(this::asCommaSeparatedString);
+        for (List<String> record : tabularData.getData()){
+            pw.println(asCommaSeparatedString(record));
+        }
         pw.close();
         auditClient.auditFileWriteAction(userId, fileName);
         return fileName;
@@ -52,11 +56,8 @@ public class CsvFileManagerStartingImpl implements CsvFileManager {
     }
 
     private String asCommaSeparatedString(List<String> data){
-        String result =
-                data.stream().collect(Collectors.joining(","));
-        return result;
+        return StringUtils.join(data,",");
     }
-
 
     @Override
     public TabularData readCsv(String userId, String fileId) {

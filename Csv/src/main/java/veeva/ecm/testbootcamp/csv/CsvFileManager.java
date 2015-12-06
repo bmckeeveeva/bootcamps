@@ -1,17 +1,21 @@
 package veeva.ecm.testbootcamp.csv;
 
-import veeva.ecm.testbootcamp.util.Environment;
+import veeva.ecm.testbootcamp.env.Environment;
 import veeva.ecm.testbootcamp.util.TabularData;
 
+/**
+ * Threadsafe service for managing the reading and writing of a csv file.
+ */
 public interface CsvFileManager {
 
     /**
      * Writes the specified tabular data to persistent storage in CSV format.
      * <p/>
      * The maximum number of data records allowed is as specified in the Vault configuration,
-     * i.e. {@link Environment#getCsvMaxRecords()}.
+     * i.e. {@link Environment#getCsvMaxRecords()}.  If input exceeds this threshold,
+     * an {@link IllegalArgumentException} will be thrown.
      * <p/>
-     * All calls to this method will be audited in the Vault audit sub-system.
+     * Any file written will be audited in the Vault audit sub-system.
      *
      * @param userId      id of the user making the request
      * @param tabularData tabular data to write

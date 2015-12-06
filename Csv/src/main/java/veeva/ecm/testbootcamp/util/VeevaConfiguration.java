@@ -148,7 +148,7 @@ public class VeevaConfiguration {
                 }
 
                 if (server == null) {
-                    throw new Exception("MBeanServer did not return a server configuration");
+                    // not in a context to use mbean server
                 } else {
                     Method m = server.getClass().getMethod("findServices");
                     Object[] services = (Object[]) m.invoke(server);

@@ -12,13 +12,16 @@ public class CsvFileManagerStartingImplTestU {
     @Test
     public void testWriteCsv(){
         TabularData tabularData = new TabularData(
-                Arrays.asList("id", "name"),
-                Arrays.asList(Arrays.asList("1", "Bob")));
+                Arrays.asList("id", "name"),    // header
+                        Arrays.asList(          // collection of tabular data
+                                Arrays.asList("1", "Bob"),
+                                Arrays.asList("2", "Bill")));
 
-        CsvFileManagerStartingImpl csvFileWriter =
+        CsvFileManagerStartingImpl csvFileManager =
                 new CsvFileManagerStartingImpl(new AuditClientMockImpl());
 
-        csvFileWriter.writeCsv(SOME_USER_ID, tabularData);
+        csvFileManager.writeCsv(SOME_USER_ID, tabularData);
 
+        // TODO:  verifications
     }
 }
