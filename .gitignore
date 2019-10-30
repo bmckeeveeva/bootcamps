@@ -1,0 +1,5 @@
+# Ignore IntelliJ directories
+**/.idea/
+
+# Ignore build artifacts
+**/target/
