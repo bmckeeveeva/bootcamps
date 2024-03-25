@@ -19,8 +19,6 @@ dependencies {
     testImplementation libs.org.mockito.mockito.core
     testImplementation libs.org.easymock.easymock
     testImplementation project(':audit-client').sourceSets.test.output
-    testImplementation libs.org.springframework.spring.test
-    testImplementation libs.org.jmockit.jmockit
 }
 
 description = 'csv'

@@ -6,10 +6,8 @@ commons-beanutils-commons-beanutils = "1.9.2"
 commons-configuration-commons-configuration = "1.10"
 commons-lang-commons-lang = "2.5"
 junit-jupiter-engine = "5.10.2"
-org-easymock-easymock = "3.4"
-org-jmockit-jmockit = "1.24"
-org-mockito-mockito-core = "1.9.5"
-org-springframework-spring-test = "4.2.4.RELEASE"
+org-easymock-easymock = "5.2.0"
+org-mockito-mockito-core = "5.11.0"
 
 [libraries]
 commons-beanutils-commons-beanutils = { module = "commons-beanutils:commons-beanutils", version.ref = "commons-beanutils-commons-beanutils" }
@@ -17,6 +15,4 @@ commons-configuration-commons-configuration = { module = "commons-configuration:
 commons-lang-commons-lang = { module = "commons-lang:commons-lang", version.ref = "commons-lang-commons-lang" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter-engine" }
 org-easymock-easymock = { module = "org.easymock:easymock", version.ref = "org-easymock-easymock" }
-org-jmockit-jmockit = { module = "org.jmockit:jmockit", version.ref = "org-jmockit-jmockit" }
 org-mockito-mockito-core = { module = "org.mockito:mockito-core", version.ref = "org-mockito-mockito-core" }
-org-springframework-spring-test = { module = "org.springframework:spring-test", version.ref = "org-springframework-spring-test" }
