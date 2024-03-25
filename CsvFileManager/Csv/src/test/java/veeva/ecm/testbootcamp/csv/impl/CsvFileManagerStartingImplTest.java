@@ -1,6 +1,6 @@
 package veeva.ecm.testbootcamp.csv.impl;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import veeva.ecm.testbootcamp.auditclient.AuditClientMockImpl;
 import veeva.ecm.testbootcamp.util.TabularData;
 
